@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+        body {background-image: url('https://theproductiveengineer.net/wp-content/uploads/2019/12/Canva-College-Students-Studying-Together-in-a-Library-1024x683.jpg');
+            background-size:100vw;color:#fff;}
+        body::before {content:"";backdrop-filter: blur(10px);position:absolute;top:0;left: 0;right: 0;bottom: 0;z-index:-2;}
+        form {display:flex;flex-direction:column;border:1px solid #000;background-color:rgb(48, 146, 178);
+            margin:60px auto 15px auto;width:460px;padding:30px;}
+        input {height:29px;}
+        form > h1 {text-align: center;}
+        form > div {display:flex;flex-direction:row;}
+        form > div > div {display: flex;flex-direction: column;}
+        form div > div:nth-child(2) {margin-left:15px;}
+        #ms-2 {margin-left:15px;}
+        #firstname {width:214px;}
+        #lastname {width:214px;}
+        #birthdate {width:214px;}
+        #age {width:214px;}
+        #btn-signUp {width:150px;height:40px;margin:15px auto 0 auto;border-radius:20px;border:none;background-color:rgb(24, 84, 104);
+            color:#fff;}
+        label {margin-bottom:10px;}
+    </style>
+</head>
+<body>
+    <form action="/LogIn" method="post">
+        <h1>Sign Up</h1>
+        <div>
+            <div>
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" id="firstname">
+            </div>
+            <div>
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" id="lastname">
+            </div>
+            <br>
+        </div>
+        <br>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <br>
+        <div>
+            <div>
+                <label for="birthdate">Birthdate</label>
+                <input type="date" name="birthdate" id="birthdate">
+            </div>
+            <br>
+            <div id="ms-2">
+                <label for="age">Age</label>
+                <input type="number" name="age" id="age">
+            </div>
+            <br>
+        </div>
+
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <br>
+        <label for="verification-password">Input password again</label>
+        <input type="password" name="verification-password">
+
+        <button id="btn-signUp"><a href="./login">Sign Up</a></button>
+    </form>
+</body>
+</html>

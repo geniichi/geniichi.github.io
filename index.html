@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+        html {scroll-behavior: smooth;}
+        a {text-decoration: none;}
+        body{margin:0;}
+        .blue {color:rgb(48, 146, 178);}
+        .black {color:black;}
+        .white {color:white;}
+        /*SCROLLBAR*/
+        body::-webkit-scrollbar {width: 10px;}
+        body::-webkit-scrollbar-track {background: #f1f1f1;}
+        body::-webkit-scrollbar-thumb {background: #888;}
+        body::-webkit-scrollbar-thumb:hover {background: #555;}
+        /*HEADER*/
+        header {background-color:#727171;position:relative;z-index:1;height:740px;}
+        header::before {content:""; background-image:url("https://theproductiveengineer.net/wp-content/uploads/2019/12/Canva-College-Students-Studying-Together-in-a-Library-1024x683.jpg");
+            position:absolute;top:0;left:-70px;right:0;bottom:0;z-index:-1;opacity:0.25;background-size:1639px;object-fit: cover;}
+        /*NAV BAR*/
+        #main-nav-bar {display:flex; flex-direction:row;justify-content: space-between;align-items:center;
+            background-color:rgb(48, 146, 178);height:60px;}
+        #logo-subnavbar-container {display:flex; flex-direction:row;justify-content: space-between;}
+        #logo-subnavbar-container a {color:white; margin-left:10px;}
+        #logo-subnavbar-container div a {margin-left:90px;color:white;font-weight:bold;}
+        #button-navBar {margin-right:15px;display:flex; flex-direction:row;justify-content: space-between;}
+        #button-navBar button {border-radius:20px;border:1px solid #fff;padding:10px;width:7vw;}
+        #button-navBar button:hover {box-shadow:2px 2px 5px;}
+        #logIn-button {background-color:transparent;margin-right:15px;color:white;}
+        #signUp-button {color:#000;}
+        /*POP UPS NAVBAR*/
+        #navBar-container {display:flex;flex-direction:row;justify-content:space-around;align-items:center;}
+        #popularNow {position:relative;}
+        #popularNow-hidden {position:absolute;top:66px;left:180px;border-radius:16px;background-color:rgba(48, 146, 178, 0.555);display:flex;justify-content:space-around;
+            padding:8px;}
+        #popularNow-hidden section {margin:5px;width:300px;height:160px;border-radius:16px;padding:10px;position:relative;}
+        #popularNow-hidden section div {height:150px;}
+        #popularNow-hidden section:nth-child(1) {background-image:url("https://www.cmuse.org/wp-content/uploads/2020/06/learn-calculus-lessons-online.jpg");
+            background-size: cover;}
+        #popularNow-hidden section:nth-child(2) {background-image:url("https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/fa/6926005ea411e490ff8d4c5d4ff426/chemistry_logo.png?auto=format%2Ccompress&dpr=1");
+            background-size: cover;}
+        #popularNow-hidden section:nth-child(3) {background-image:url("https://youthincmag.com/wp-content/uploads/2019/09/Graphic-Maps.jpg");
+            background-size: cover;}
+        #popularNow-hidden section div h1 {margin:5px;font-size:30px;background-color:rgba(255, 255, 255, 0.59);width:50px;padding:5px;}
+        #popularNow-hidden section p {text-align: left;font-size:17px;background-color:rgb(48, 146, 178);position:absolute;top:110px;left:0;width:305px;height:43.5px;
+            border-radius:0 0 16px 16px;padding-top:10px;padding-left:15px;}
+        /*SEARCH BAR*/
+        #title {text-align: center;margin-top:190px;font-size:60px;}
+        #searchBar-container {margin: 0 auto;display:flex;justify-content: center;border-radius:0px;height:78.8px;}
+        #searchBar-container input {width:530px;height:29px;padding:20px;font-size:17px;border-radius:16px 0 0 16px;
+            border-right:none;border:none;}
+        #searchBar-container button {height:68.7px;width:5vw;border-radius:0px;border-radius:0 16px 16px 0;border:none;
+            background-color:rgb(48, 146, 178);font-size:20px;}
+        #searchBar-container input:focus {outline: none;}
+        #title-caption {text-align: center;color:#c8c6c6;font-size:16px;margin-top:0;}
+        /*BUTTON*/
+        #homePage-button {margin:auto 42%;width:15%;height:60px;border-radius:10px;border:none;background-color:rgb(48, 146, 178);color:white;
+            font-size: 14px;transition: all 0.75s;}
+        #homePage-button:hover {box-shadow:rgb(31, 92, 112) 5px 5px;}
+        /*SECTION PARAGRAPH */
+        #section-para {padding:30px;background-color: #313131;}
+        #section-para > div {display:flex;flex-direction:row;justify-content: space-around;align-items:center;margin:50px 10rem;}
+        #section-para > div:nth-child(3) {background-color:#ccc;margin:0;padding:50px;color:#000;}
+        .section-para-imageHolder {height:19rem;width:90rem;}
+        .section-para-imageHolder img {height:100%;width:100%;object-fit:cover;}
+        .section-para-imageHolder:nth-child(1) {height:32rem;width:90rem;}
+        #section-para > div > div h1 {font-size:2rem;margin:5px auto auto 30px;}
+        #section-para > div > div div {padding:30px;}
+        #section-para > div > div  div p {font-size:1rem;line-height:40px;}
+        /*STICKY BUTTON*/
+        #sticky-btn-container {margin:5px;padding:0;display:flex;justify-content: flex-end;}
+        #sticky-btn {width:50px;height:50px;display:none;position:fixed;bottom: 20px;right: 20px;z-index: 99;background-color:rgb(48, 146, 178);
+            color: #fff;border: none;outline: none;cursor: pointer;padding: 7px 15px 15px 15px;font-size:25px;}
+        #sticky-btn.show {display: block;}
+        /*PRICING*/
+        #pricing-main-container {background-color: #454545;padding:50px 1px;}
+        #pricing-main-container > h1 {font-size:30px;color:#fff;}
+        #pricing-main-container h1 {margin-top:0;padding:20px 0;text-align: center;border-radius:9px 9px 0 0;}
+        #pricing-main-container div div:nth-child(1) h1 {color: rgb(25, 79, 97);}
+        #pricing-main-container div div:nth-child(2) h1 {color: rgb(41, 125, 153);}
+        #pricing-main-container div div:nth-child(3) h1 {color: rgb(60, 179, 218);}
+        #pricing-main-container > div {display:flex;flex-direction: row;justify-content: space-evenly;align-items: center;padding-bottom:50px;}
+        .pricing-content {border-radius:9px;background-color:#cdc8c8;width:18rem;height:350px;padding: 0 0 2% 0;transition:all 0.4s}
+        .pricing-content:hover {transform:scale(1.08)}
+        .pricing-content > div p {font-size:30px;color:#494848;text-align: center;}
+        .bold {font-weight: bold;color:#000;}
+        .pricing-content > ul {margin:9%;}
+        .pricing-content > ul li {padding:9px 15px;text-align: center;}
+        /*FOOTER*/
+        footer {background-color:#313131;}
+        #footer-section-container {display:flex;flex-direction:row;justify-content: center;}
+        ul {list-style-type: none;margin:0;padding:0;}
+        .footer-sections {margin: 5px 3rem;color:#fff;}
+        .footer-sections a {font-size:0.90rem;color:#ffff;}
+        .footer-sections ul li {margin:15px auto;}
+        .footer-sections ul li i {margin-right:0.5rem;}
+        .footer-sections:nth-child(1) {width:19rem;}
+        .footer-sections:nth-child(1) p {font-size:0.89rem;}
+        .footer-sections > form > div input {width:20rem;height:30px;border:none;padding-left:15px;}
+        .footer-sections > form > div button {width:7rem;height:35px;border:1px solid #000;margin-top:15px;
+            background-color:rgb(48, 146, 178);transition: ease-in-out 0.4s;}
+        .footer-sections > form > div button:hover {background-color:rgb(46, 181, 226);}
+        #copyright {text-align: center;margin:15px auto 0 auto;padding-bottom:30px;color:white;}
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>StudySmart</title>
+</head>
+<body>
+    <header>
+        <nav id="main-nav-bar">
+            <div id="logo-subnavbar-container">
+                <a target="_blank"  class="Navbar-texts"><span class="black">Study</span><span class="white">Smart</span></a>
+                <div id="navBar-container">
+                    <div id="popularNow-trigger" onmouseover="popUpPopularShow()" onmouseout="popUpPopularHide()">
+                        <a href="" class="Navbar-texts" id="popularNow">Popular Now</a>
+                        <div id="popularNow-hidden" style="display:none;">
+                            <section>
+                                <div>
+                                    <h1>#1</h1>
+                                </div>
+                                <p>Intermediate Calculus</p>
+                            </section>
+                            <section>
+                                <div>
+                                    <h1>#2</h1>
+                                </div>
+                                <p>Chemistry</p>
+                            </section>
+                            <section>
+                                <div>
+                                    <h1>#3</h1>
+                                </div>
+                                <p>History and social sciences</p>
+                            </section>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="" class="Navbar-texts">New Updates</a>
+                    </div>
+                    <div>
+                        <a href="" class="Navbar-texts">Store</a>
+                    </div>
+                    <div>
+                        <a href="" class="Navbar-texts">News</a>
+                    </div>
+
+                </div>
+            </div>
+            <div id="button-navBar">
+                <form action="/LogIn" method="post">
+                    <button id="logIn-button"><a href="./login">Log In</a></button>
+                </form>
+                <form action="/SignUp" method="post">
+                    <button id="signUp-button" action="/SignUp" method="post"><a href="./signup">Sign Up</a></button>
+                </form>
+            </div>
+        </nav>
+        <h1 id="title"><span class="blue">Study</span><span class="white">Smart</span></h1>
+        <div id="searchBar-container">
+            <input type="text" placeholder="Input title">
+            <button name="search"><i class="fa fa-search"></i></button>
+        </div>
+        <p id="title-caption">StudySmart - Manage your academic future!</p>
+        <form action="/homepage" method="post">
+            <button id="homePage-button"><a href="./homepage">Go To Homepage</a></button>
+        </form>
+    </header>
+    <section id="section-para">
+        <div>
+            <div>
+                <h1 class="white">About Us</h1>
+                <div class="white">
+                    <p>
+                        Welcome to StudySmart&#8482;, an online learning company dedicated to helping students achieve their academic goals.
+                        At StudySmart, we believe that education is the key to unlocking one's full potential and making a positive
+                        impact on the world. That's why we're committed to providing high-quality, affordable online courses to learners
+                        of all ages and backgrounds.
+                    </p>
+                    <p>
+                        Our team of experienced educators and subject matter experts work tirelessly to develop engaging and interactive
+                        learning materials that are designed to meet the diverse needs of our students. Whether you're looking to improve
+                        your grades, enhance your job skills, or simply learn something new, we've got you covered. Our courses cover a wide
+                        range of subjects, from math and science to business and technology, and everything in between.
+                    </p>
+                </div>
+            </div>
+            <div class="section-para-imageHolder">
+                <img src="https://www.treehouseacademy.org/wp-content/uploads/2020/01/Preschool-1.jpg">
+            </div>
+        </div>
+        <!---->
+        <nav id="sticky-btn-container">
+            <button id="sticky-btn">&#8593;</button>
+        </nav>
+
+        <div>
+            <div class="section-para-imageHolder">
+               <img src="https://cdn.psychologytoday.com/sites/default/files/styles/image-article_inline_full_caption/public/field_blog_entry_images/2018-08/teenager_in_school.jpg?itok=0Q7v_5i-">
+            </div>
+            <div>
+                <h1>Why pick us</h1>
+                <div>
+                    <p>
+                        We understand that everyone learns differently, which is why we offer a variety of learning formats, including video
+                        lectures, interactive quizzes, and hands-on assignments, to help you master the material in a way that works best for you.
+                        Our platform is user-friendly and easy to navigate, so you can focus on learning without getting bogged down by technical
+                        issues.
+                    </p>
+                    <p>
+                        At StudySmart, we're not just here to teach you; we're here to support you on your educational journey.
+                        Our team is always available to answer your questions and provide feedback, and our community of learners
+                        is a great resource for connecting with like-minded individuals and forming study groups.
+                    </p>
+                    <p>
+                        Thank you for choosing StudySmart as your online learning partner. We're excited to help you unlock your full potential
+                        and achieve your dreams.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--PRICING-->
+    <section id="pricing-main-container">
+        <h1>Pricing</h1>
+        <div>
+            <div class="pricing-content">
+                <h1>Free</h1>
+                <div>
+                    <p><span class="bold">&#8369;O</span>/mo</p>
+                </div>
+                <ul>
+                    <li>Access to free lessons</li>
+                    <li>Access to free activities</li>
+                    <li>Access to free notes and inscriptions</li>
+                </ul>
+            </div>
+            <div class="pricing-content">
+                <h1>Pro</h1>
+                <div>
+                    <p><span class="bold">&#8369;499</span>/mo</p>
+                </div>
+                <ul>
+                    <li>Access to pro lessons</li>
+                    <li>Access to pro activities</li>
+                    <li>Access to pro notes and inscriptions</li>
+                    <li>Teacher's help access</li>
+                </ul>
+            </div>
+            <div class="pricing-content">
+                <h1>Premium</h1>
+                <div>
+                    <p><span class="bold">&#8369;1299</span>/mo</p>
+                </div>
+                <ul>
+                    <li>Access to premium lessons</li>
+                    <li>Access to premium activities</li>
+                    <li>Access to premium notes and inscriptions</li>
+                    <li>Personal teacher</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+    <!--FOOTER-->
+    <footer>
+        <div id="footer-section-container">
+            <div class="footer-sections">
+                <h3>Where to find us</h3>
+                <p>Suite 402 Traders Hotel Roxas Boulevard</p>
+                <p>pasay city,</p>
+                <p>Pasay City,Philippines</p>
+            </div>
+            <div class="footer-sections">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fa fa-phone"></i><a href="#">(+63) 966 527 8644</a></li>
+                    <li><i class="fa fa-envelope"></i><a href="#">StudySmart@gmail.co.ph</a></li>
+                    <li><i class="fa fa-twitter"></i><a href="#">StudySmart</a></li>
+                    <li><i class="fa fa-linkedin"></i><a href="#">Study Smart</a></li>
+                    <li><i class="fa fa-globe"></i><a href="#">www.StudySmart.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-sections">
+                <h3>Section</h3>
+                <ul>
+                    <li><a href="#">Popular Now</a></li>
+                    <li><a href="#">New Updates</a></li>
+                    <li><a href="#">Store</a></li>
+                    <li><a href="#">New</a></li>
+                </ul>
+            </div>
+            <div class="footer-sections">
+                <form>
+                    <h3>Subscribe to our newsletter</h3>
+                    <p>Monthly digest of what's new and exciting from us.</p>
+                    <div>
+                        <input id="newsletter1" type="email" placeholder="Email address">
+                        <button type="button" id="btn">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div >
+            <p id="copyright">&copy; 2022 Company, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        /*POP-UP*/
+        function popUpPopularShow() {
+            document.getElementById("popularNow-hidden").style.display = "flex";
+        }
+
+        function popUpPopularHide() {
+            timeout = setTimeout(function() {
+            document.getElementById("popularNow-hidden").style.display = "none";
+            }, 500);
+        }
+        /*STICKY BUTTON*/
+        const btn = document.getElementById("sticky-btn");
+
+        window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            btn.classList.add("show");
+        } else {
+            btn.classList.remove("show");
+        }
+        };
+        btn.addEventListener("click", function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        });
+    </script>
+
+</body>
+</html>

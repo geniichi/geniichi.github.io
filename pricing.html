@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySmart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+        body{margin:0;}
+        a {text-decoration:none;color:black;}
+        input[type="text"]:focus {outline:none;}
+        /*SCROLLBAR*/
+        body::-webkit-scrollbar {width: 10px;}
+        body::-webkit-scrollbar-track {background: #f1f1f1;}
+        body::-webkit-scrollbar-thumb {background: #888;}
+        body::-webkit-scrollbar-thumb:hover {background: #555;}
+        /*NAVBAR*/
+        nav {background-color:rgb(48, 146, 178);display:flex;justify-content:space-between;align-items: center;padding:13px;}
+        #Nav-content {display:flex;flex-direction:row;align-items: center;}
+        #menu-icon {padding:8px;cursor: pointer;position:relative;}
+        #popUp-hidden {position:absolute;top:65px;left:25px;background-color:rgb(7, 118, 155);z-index:5;width:12rem;border-radius:5px;}
+        #popUp-hidden ul {list-style-type: none;padding-left:0;display:flex;flex-direction:column;justify-content: center;}
+        #popUp-hidden ul li {padding:18px 19px;cursor: pointer;}
+        #popUp-hidden ul li:hover {background-color: rgb(2, 89, 118);}
+        #popUp-hidden ul li:nth-child(1) {padding-top:5px;}
+        #menu-icon div {width: 31px;height: 3px;background-color: #000000;margin: 6px 0;transition: 0.4s;}
+        .change .navBarstick1 {transform: translate(0, 9px) rotate(-45deg);}
+        .change .navBarstick2 {opacity:0;}
+        .change .navBarstick3 {transform: translate(0, -9px) rotate(45deg);}
+        #popUp-hidden{display:none;}
+        #popUp-hidden.show{display:block;}
+        #title-redirect {color:#000000;margin:0;border:none;font-size:20px;font-weight: bold;background-color:rgb(48, 146, 178);}
+        #title-redirect:hover {background-color:rgb(48, 146, 178);}
+        #Nav-content > form {width:490px;margin-left:35px;display:flex;align-items: center;}
+        #Nav-content form input {width:45vw;height:39px;border-radius:0 16px 16px 0;border:none;padding-left:20px;background-color: #cac3c3;
+            transition:all 0.75s;border:1px solid #000;border-left:none;}
+        #Nav-content form input:focus {background-color:#ffff;}
+        #Nav-content > form button {height:42.5px;border-radius:16px 0 0 16px;border:none;width:50px;background-color: #cac3c3;color:rgb(48, 146, 178);
+            font-size:15px;border:1px solid #000;border-right:none;margin-top:0;}
+        #Nav-user {display:flex;justify-content: space-evenly;align-items: center;}
+        #Nav-user button {margin: auto 5px;border-radius:20px;border:1px solid #fff;padding:10px;width:7vw;cursor: pointer;}
+        #logIn-button {background-color:transparent;margin-right:15px;color:white;height:40px;}
+        #signUp-button {color:#000;height:40px;}
+        #Nav-user div {margin-right:45px;display:flex;flex-direction: row;}
+        #Nav-user div a {margin: auto 5px;font-size:16px;margin: auto 10px;border-radius:30px;padding:10px;color:#fff;}
+        #Nav-user div a:nth-child(3){background-color:rgb(230, 114, 19);}
+        #Nav-user div a:nth-child(2){background-color:rgb(16, 133, 173);padding:10px 11px;}
+        #Nav-user div a:nth-child(1){background-color:rgb(52, 52, 196);padding:9px 12px;}
+        /*PRICING*/
+        #pricing-main-container {background-color: #454545;padding:60px 0 5px 0;}
+        #pricing-main-container > h1 {font-size:30px;color:#fff;}
+        #pricing-main-container h1 {margin-top:0;padding:20px 0;text-align: center;border-radius:9px 9px 0 0;}
+        #pricing-main-container div div:nth-child(1) h1 {color: rgb(25, 79, 97);}
+        #pricing-main-container div div:nth-child(2) h1 {color: rgb(41, 125, 153);}
+        #pricing-main-container div div:nth-child(3) h1 {color: rgb(60, 179, 218);}
+        #pricing-main-container > div {display:flex;flex-direction: row;justify-content: space-evenly;align-items: center;padding-bottom:180px;}
+        .pricing-content {border-radius:9px;background-color:#cdc8c8;width:18rem;height:350px;padding: 0 0 2% 0;transition:all 0.4s}
+        .pricing-content:hover {transform:scale(1.08)}
+        .pricing-content > div p {font-size:30px;color:#494848;text-align: center;}
+        .bold {font-weight: bold;color:#000;}
+        .pricing-content > ul {margin:9%;}
+        .pricing-content > ul li {padding:9px 15px;text-align: center;}
+        /*FOOTER*/
+        #footer-section-container {display:flex;flex-direction:row;justify-content: center;color:white;}
+        ul {list-style-type: none;margin:0;padding:0;}
+        .footer-sections {margin: 5px 3rem;}
+        .footer-sections a {font-size:0.90rem;color:#ffff;}
+        .footer-sections ul li {margin:15px auto;}
+        .footer-sections ul li i {margin-right:0.5rem;}
+        .footer-sections:nth-child(1) {width:19rem}
+        .footer-sections:nth-child(1) p {font-size:0.89rem;}
+        .footer-sections > form > div input {width:20rem;height:30px;border:none;padding-left:15px;}
+        #copyright {text-align: center;margin:15px auto 35px auto;color:#fff;}
+        #btn {background-color:rgb(48, 146, 178);border:none;padding:7.5px;margin-top:30px;}
+    </style>
+</head>
+<body>
+    <nav>
+        <div id="Nav-content">
+            <div onclick="changeToX(this)" id="menu-icon">
+                <div class="navBarstick1"></div>
+                <div class="navBarstick2"></div>
+                <div class="navBarstick3"></div>
+            </div>
+            <section id="popUp-hidden">
+                <ul>
+                    <li>Popular Now</li>
+                    <li>New Updates</li>
+                    <li>Store</li>
+                    <li>News</li>
+                </ul>
+            </section>
+            <div>
+                <form action="/landing" method="post">
+                    <h1><button id="title-redirect"><a href="./index">Study<span class="white">Smart</span></a></button></h1>
+                </form>
+            </div>
+            <form>
+                <button type="submit"><i class="fa fa-search"></i></button>
+                <input type="text" placeholder="Search...">
+            </form>
+        </div>
+        <div id="Nav-user">
+            <div>
+                <a href="" class="fa fa-facebook"></a>
+                <a href="" class="fa fa-twitter"></a>
+                <a href="" class="fa fa-reddit"></a>
+            </div>
+            <form action="/LogIn" method="post">
+                <button id="logIn-button"><a href="./login">Log In</a></button>
+            </form>
+            <form action="/SignUp" method="post">
+                <button id="signUp-button"><a href="./signup">Sign In</a></button>
+            </form>
+        </div>
+    </nav>
+    <!--PRICING-->
+    <section id="pricing-main-container">
+        <h1>Pricing</h1>
+        <div>
+            <div class="pricing-content">
+                <h1>Free</h1>
+                <div>
+                    <p><span class="bold">&#8369;O</span>/mo</p>
+                </div>
+                <ul>
+                    <li>Access to free lessons</li>
+                    <li>Access to free activities</li>
+                    <li>Access to free notes and inscriptions</li>
+                </ul>
+            </div>
+            <div class="pricing-content">
+                <h1>Pro</h1>
+                <div>
+                    <p><span class="bold">&#8369;499</span>/mo</p>
+                </div>
+                <ul>
+                    <li>Access to pro lessons</li>
+                    <li>Access to pro activities</li>
+                    <li>Access to pro notes and inscriptions</li>
+                    <li>Teacher's help access</li>
+                </ul>
+            </div>
+            <div class="pricing-content">
+                <h1>Premium</h1>
+                <div>
+                    <p><span class="bold">&#8369;1299</span>/mo</p>
+                </div>
+                <ul>
+                    <li>Access to premium lessons</li>
+                    <li>Access to premium activities</li>
+                    <li>Access to premium notes and inscriptions</li>
+                    <li>Personal teacher</li>
+                </ul>
+            </div>
+        </div>
+        <footer>
+            <div id="footer-section-container">
+                <div class="footer-sections">
+                    <h3>Where to find us</h3>
+                    <p>Suite 402 Traders Hotel Roxas Boulevard</p>
+                    <p>pasay city,</p>
+                    <p>Pasay City,Philippines</p>
+                </div>
+                <div class="footer-sections">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fa fa-phone"></i><a href="#">(+63) 966 527 8644</a></li>
+                        <li><i class="fa fa-envelope"></i><a href="#">StudySmart@gmail.co.ph</a></li>
+                        <li><i class="fa fa-twitter"></i><a href="#">StudySmart</a></li>
+                        <li><i class="fa fa-linkedin"></i><a href="#">Study Smart</a></li>
+                        <li><i class="fa fa-globe"></i><a href="#">www.StudySmart.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-sections">
+                    <h3>Section</h3>
+                    <ul>
+                        <li><a href="#">Popular Now</a></li>
+                        <li><a href="#">New Updates</a></li>
+                        <li><a href="#">Store</a></li>
+                        <li><a href="#">New</a></li>
+                    </ul>
+                </div>
+                <div class="footer-sections">
+                    <form>
+                        <h3>Subscribe to our newsletter</h3>
+                        <p>Monthly digest of what's new and exciting from us.</p>
+                        <div>
+                            <input id="newsletter1" type="email" placeholder="Email address">
+                            <button type="button" id="btn">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div >
+                <p id="copyright">&copy; 2022 Company, Inc. All rights reserved.</p>
+            </div>
+        </footer>
+    </section>
+    <script>
+        //menu icon
+        function changeToX(x) {
+        x.classList.toggle("change");
+        document.getElementById("popUp-hidden").classList.toggle("show");
+        }
+
+        //Buttons
+        const buttons = document.querySelectorAll('button');
+
+        buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.style.boxShadow = '3px 3px 0 #fff';
+            setTimeout(() => {
+            button.style.boxShadow = '';
+            }, 900);
+        });
+        });
+    </script>
+</body>
+</html>

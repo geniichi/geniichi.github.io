@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+        html {min-width:1060px;}
+        body {margin:0;background-color:#313131;color:white;overflow-x:hidden;}
+        input:focus {outline:none;}
+        a {text-decoration:none;color:black;}
+        .white {color:white;}
+        /*SCROLLBAR*/
+        body::-webkit-scrollbar {width: 10px;}
+        body::-webkit-scrollbar-track {background: #f1f1f1;}
+        body::-webkit-scrollbar-thumb {background: #888;}
+        body::-webkit-scrollbar-thumb:hover {background: #555;}
+        /*NAVBAR*/
+        nav {background-color:rgb(48, 146, 178);display:flex;justify-content:space-between;align-items: center;padding:13px;}
+        #Nav-content {display:flex;flex-direction:row;align-items: center;}
+        #menu-icon {padding:8px;cursor: pointer;position:relative;}
+        #popUp-hidden {position:absolute;top:65px;left:25px;background-color:rgb(7, 118, 155);z-index:5;width:12rem;border-radius:5px;}
+        #popUp-hidden ul {list-style-type: none;padding-left:0;display:flex;flex-direction:column;justify-content: center;}
+        #popUp-hidden ul li {padding:18px 19px;cursor: pointer;}
+        #popUp-hidden ul li:nth-child(1) {padding-top:5px;}
+        #menu-icon div {width: 31px;height: 3px;background-color: #000000;margin: 6px 0;transition: 0.4s;}
+        .change .navBarstick1 {transform: translate(0, 9px) rotate(-45deg);}
+        .change .navBarstick2 {opacity:0;}
+        .change .navBarstick3 {transform: translate(0, -9px) rotate(45deg);}
+        #normal form button {border:none;background-color:rgb(7, 118, 155);font-size:16px;color:#fff;}
+        #popUp-hidden{display:none;}
+        #popUp-hidden.show{display:block;}
+        #title-redirect {color:#000000;margin:0;border:none;font-size:20px;font-weight: bold;background-color:rgb(48, 146, 178);}
+        #title-redirect:hover {box-shadow: none;}
+        #Nav-content > form {width:490px;margin-left:35px;display:flex;align-items: center;}
+        #Nav-content form input {width:45vw;height:39px;border-radius:0 16px 16px 0;border:none;padding-left:20px;background-color: #cac3c3;
+            transition:all 0.75s;border:1px solid #000;border-left:none;}
+        #Nav-content form input:focus {background-color:#ffff;}
+        #Nav-content > form button {height:42.5px;border-radius:16px 0 0 16px;border:none;width:50px;background-color: #cac3c3;color:rgb(48, 146, 178);
+            font-size:15px;border:1px solid #000;border-right:none;margin-top:0;}
+        #Nav-user {display:flex;justify-content: space-evenly;align-items: center;}
+        #Nav-user button {margin: auto 5px;border-radius:20px;border:1px solid #fff;padding:10px;width:7vw;cursor: pointer;}
+        #logIn-button {background-color:transparent;margin-right:15px;color:white;height:40px;}
+        #signUp-button {color:#000;height:40px;}
+        #Nav-user div {margin-right:45px;display:flex;flex-direction: row;}
+        #Nav-user div a {margin: auto 5px;font-size:16px;margin: auto 10px;border-radius:30px;padding:10px;color:#fff;}
+        #Nav-user div a:nth-child(3){background-color:rgb(230, 114, 19);}
+        #Nav-user div a:nth-child(2){background-color:rgb(16, 133, 173);padding:10px 11px;}
+        #Nav-user div a:nth-child(1){background-color:rgb(52, 52, 196);padding:9px 12px;}
+        /*SWIPER SHOW PREVIEW*/
+        .swiper {border:1px solid #000;margin:30px;height:400px;}
+        .swiper-slide img {width:100vw;}
+        .swiper-slide {position:relative;}
+        .swiper-slide div {position:absolute;top:0;left:0;right:0;bottom:0;margin-top:250px;}
+        .swiper-slide div h1 {background-color: rgba(48, 146, 178, 0.922);margin:0;padding:15px 0 0 15px;}
+        .swiper-slide div p {background-color: rgba(48, 146, 178, 0.922);margin:0;padding:15px 0 15px 15px;height:130px;}
+        .swiper .swiper-button-prev, .swiper .swiper-button-next {color:#fff;-webkit-text-stroke: 1px #515050;}
+        .swiper .swiper-pagination-bullet-active {background-color:#fff;}
+        /*LESSON TITLE*/
+        #lessons-title {background-color:#3b3a3a;text-align: center;padding:20px;margin:auto 2.1% 30px 2.1%;}
+        /*MAIN*/
+        main {display:flex;justify-content: space-between;}
+        /*MAIN SEPARATOR*/
+        #Left-main {width:65vw;padding:30px;background-color:#3b3a3a;margin:auto auto 30px 2.1%;}
+        #Right-main {display:flex;flex-direction: column;width:21vw;margin:0 2.1% 30px auto;padding:18px;background-color:#3b3a3a;}
+        /*LEFT-MAIN*/
+        #Left-main > h1 {margin-left:15px;}
+        #Left-main h1:nth-child(1) {margin-top:0;}
+        /*LESSON CONTAINER */
+        .lessons-holder {display:grid;grid-template-rows:1fr;grid-template-columns:repeat(3,1fr);}
+        .lessons {border:1px solid #000;margin:5px;border-radius:6px;padding:5px;padding:0;height:250px;position:relative;}
+        .lesson-review {backdrop-filter:blur(10px);font-size: 15px;position:absolute;bottom:0;left:0;right:0;
+            border-radius:0 0 6px 6px;height:108px;overflow-y:scroll;}
+        .lesson-review::-webkit-scrollbar {width: 0px;}
+        .lesson-review div {color:#ffffff;background-color:#0000005a;margin:0;padding:0 10px 40px 10px;}
+        .lesson-review p {color:#ffffff;font-weight:400;background-color:#0000005a;margin:0;padding:10px;}
+        .lessons:nth-child(1):hover {transform:scale(1.09);transform-origin:left bottom;z-index:2;}
+        .lessons:nth-child(2):hover {transform:scale(1.09);transform-origin:bottom;z-index:2;}
+        .lessons:nth-child(3):hover {transform:scale(1.09);transform-origin:right bottom;z-index:2;}
+        .lessons > h1 {font-size:1rem;background-color:rgba(48, 146, 178);border-radius:6px 6px 0 0;height:40px;padding:8px;overflow:hidden;}
+        #lesson-button {width:17rem;height:50px;font-size:1rem;margin-top:30px;border:none;
+            background-color:rgb(48, 146, 178);transition: ease-in-out 0.4s;}
+        #lesson-button:hover {background-color:rgb(46, 181, 226);}
+        /*>> ENGLISH */
+        .english-lessons:nth-child(1){background-image:url('https://study.com/cimages/videopreview/videopreview-full/the-impact-of-oral-language-on-reading-development-thumbnail_171573.jpg');
+            background-size:400px;transition:all 0.5s;}
+        .english-lessons:nth-child(2){background-image:url('https://i2.wp.com/www.differencebetween.com/wp-content/uploads/2018/06/Difference-Between-Modern-and-Contemporary-Literature-fig-1.jpg');
+            background-size:400px;transition:all 0.5s;}
+        .english-lessons:nth-child(3){background-image:url('https://www.euraxess.gov.ro/sites/default/files/domains/ro/shutterstock_251529133.jpg');
+            background-size:400px;transition:all 0.5s;}
+        /*>> MATH */
+        .math-lessons:nth-child(1){background-image:url('https://pll.harvard.edu/sites/default/files/styles/header/public/course/asset-v1_HarvardX%2BCalcAPL1x%2B2T2017%2Btype%40asset%2Bblock%40TITLE-Calculus-Applied-2120x1192-NO-SPOTLIGHT%202.png?itok=crWwjmVi');
+            background-size:400px;transition:all 0.5s;}
+        .math-lessons:nth-child(2){background-image:url('https://www.shutterstock.com/image-vector/business-marketing-concepts-standard-deviation-260nw-1890256387.jpg');
+            background-size:400px;transition:all 0.5s;}
+        .math-lessons:nth-child(3){background-image:url('https://www.shutterstock.com/image-photo/homeschool-maths-concept-notepad-math-260nw-1723155667.jpg');
+            background-size:400px;transition:all 0.5s;}
+        /*>> SCIENCE */
+        .science-lessons:nth-child(1){background-image:url('https://cdn.pixabay.com/photo/2018/07/15/10/44/dna-3539309__480.jpg');
+            background-size:400px;transition:all 0.5s;}
+        .science-lessons:nth-child(2){background-image:url('https://council.science/wp-content/uploads/2017/04/IUPAC-feature-image-1400x600.jpg');
+            background-size:400px;transition:all 0.5s;}
+        .science-lessons:nth-child(3){background-image:url('https://cdn.mos.cms.futurecdn.net/UqKrHFjGaYQ3Fi9rACt6S9-1200-80.jpg');
+            background-size:400px;transition:all 0.5s;}
+        .checked-star {color:orange;}
+        /*RIGHT-MAIN*/
+        #Right-main > h1 {text-align: center;}
+        #class-section {display:grid;grid-template-rows:1fr;grid-template-columns:repeat(2,1fr);}
+        .subjects {display:flex;flex-direction:row;}
+        .grade {display:flex;flex-direction:row;margin-left:3.3rem;}
+        #class-section div:nth-child(2) h2{margin-left:3.3rem;}
+        #rightMain-button {margin: auto 55%;width:10rem;margin-top:60px;width:7rem;height:35px;border:none;margin-top:15px;
+            background-color:rgb(48, 146, 178);transition: ease-in-out 0.4s;}
+        #rightMain-button:hover {background-color:rgb(46, 181, 226);}
+        /*FOOTER*/
+        #footer-section-container {display:flex;flex-direction:row;justify-content: center;}
+        ul {list-style-type: none;margin:0;padding:0;}
+        .footer-sections {margin: 5px 3rem;}
+        .footer-sections a {font-size:0.90rem;color:#ffff;}
+        .footer-sections ul li {margin:15px auto;}
+        .footer-sections ul li i {margin-right:0.5rem;}
+        .footer-sections:nth-child(1) {width:19rem}
+        .footer-sections:nth-child(1) p {font-size:0.89rem;}
+        .footer-sections > form > div input {width:20rem;height:30px;border:none;padding-left:15px;}
+        #copyright {text-align: center;margin:15px auto 35px auto;}
+        #btn {width:7rem;height:35px;border:1px solid #000;margin-top:15px;
+            background-color:rgb(48, 146, 178);transition: ease-in-out 0.4s;}
+        #btn:hover {background-color:rgb(46, 181, 226);}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <title>StudySmart</title>
+</head>
+<body>
+    <nav>
+        <div id="Nav-content">
+            <div onclick="changeToX(this)" id="menu-icon">
+                <div class="navBarstick1"></div>
+                <div class="navBarstick2"></div>
+                <div class="navBarstick3"></div>
+            </div>
+            <section id="popUp-hidden">
+                <ul>
+                    <li>Popular Now</li>
+                    <li>New Updates</li>
+                    <li id="normal"><form action="/pricing" method="post"><button><a href="./pricing">Store</a></button></form></li>
+                    <li>News</li>
+                </ul>
+            </section>
+            <div>
+                <form action="/landing" method="post">
+                    <h1><button id="title-redirect"><a href="./index">Study<span class="white">Smart</span></a></button></h1>
+                </form>
+            </div>
+            <form>
+                <button type="submit"><i class="fa fa-search"></i></button>
+                <input type="text" placeholder="Search...">
+            </form>
+        </div>
+        <div id="Nav-user">
+            <div>
+                <a href="" class="fa fa-facebook"></a>
+                <a href="" class="fa fa-twitter"></a>
+                <a href="" class="fa fa-reddit"></a>
+            </div>
+            <form action="/LogIn" method="post">
+                <button id="logIn-button"><a href="./login">Log In</a></button>
+            </form>
+            <form action="/SignUp" method="post">
+                <button id="signUp-button"><a href="./signup">Sign In</a></button>
+            </form>
+        </div>
+    </nav>
+    <!-- Slider main container -->
+    <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+        <!-- Slides -->
+            <div class="swiper-slide">
+                <img src="https://www.cmuse.org/wp-content/uploads/2020/06/learn-calculus-lessons-online.jpg">
+                <div>
+                    <h1>Calculus</h1>
+                    <p>Calculus is a type of math that helps us understand how things change over time or in response to varying inputs.
+                        It involves studying functions and their properties, and is used in many fields to help solve complex problems.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/fa/6926005ea411e490ff8d4c5d4ff426/chemistry_logo.png?auto=format%2Ccompress&dpr=1">
+                <div>
+                    <h1>Chemistry</h1>
+                    <p>Chemistry is a branch of science that deals with the composition, properties, and reactions of matter.
+                        It involves studying the structure and behavior of atoms and molecules, and how they interact with each
+                        other to form new substances. Chemistry is used in many fields, including medicine, materials science,
+                        environmental science, and engineering, and is essential for understanding the world around us. </p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://youthincmag.com/wp-content/uploads/2019/09/Graphic-Maps.jpg">
+                <div>
+                    <h1>World History</h1>
+                    <p>World history is the study of past events, developments, and changes in human societies and civilizations
+                        around the world, from ancient times to the present day. It helps us understand how different regions and
+                         cultures have evolved over time, and the factors that have influenced them.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://leverageedublog.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2019/09/23165019/Biology.jpg">
+                <div>
+                    <h1>Biology</h1>
+                    <p>Biology is the study of living organisms and their interactions with each other and their environment.
+                        It helps us understand the structure, function, and behavior of living things, from the smallest cells
+                        to entire ecosystems.</p>
+                </div>
+            </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    <h1 id="lessons-title">Lessons</h1>
+    <main>
+        <div id="Left-main">
+            <!--ENGLISH-->
+            <h1>English</h1>
+            <div class="lessons-holder">
+                <div class="lessons english-lessons lessonRedirector">
+                    <h1>Reading and Oral comprehension</h1>
+                    <div class="lesson-review">
+                        <p>Developing the ability to read, understand texts, and to
+                             communicate effectively through spoken languages.
+                        </p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lessons english-lessons lessonRedirector">
+                    <h1>Past and Contemporary Literature</h1>
+                    <div class="lesson-review">
+                        <p>Analyzes different types of literature, such as novels,
+                            plays, and poetry, and analyzing themes, characters, and literary techniques.</p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lessons english-lessons lessonRedirector">
+                    <h1>Research and citation</h1>
+                    <div class="lesson-review">
+                        <p>learning how to conduct research, evaluate sources, and properly cite information in their own writing.</p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--MATH-->
+            <h1>Math</h1>
+            <div class="lessons-holder">
+                <div class="lessons math-lessons" class="lessonRedirector">
+                    <h1>Calculus</h1>
+                    <div class="lesson-review">
+                        <p>Deals with changing and optimizing real-world phenomena via rates of change and areas/volumes.
+                        </p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lessons math-lessons" class="lessonRedirector">
+                    <h1>Statistics and Probability</h1>
+                    <div class="lesson-review">
+                        <p>
+                            The study of data collection, analysis, interpretation and likelihood of events.
+                        </p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lessons math-lessons" class="lessonRedirector">
+                    <h1>Arithmetic</h1>
+                    <div class="lesson-review">
+                        <p>
+                            Study of basic operations and
+                             is the foundation of all higher branches of mathematics
+                        </p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--SCIENCE-->
+            <h1>Science</h1>
+            <div class="lessons-holder">
+                <div class="lessons science-lessons lessonRedirector">
+                    <h1>Biology</h1>
+                    <div class="lesson-review">
+                        <p>
+                            Biology studies life and helps us improve the world, human health, and ecosystems.
+                        </p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lessons science-lessons lessonRedirector">
+                    <h1>Chemistry</h1>
+                    <div class="lesson-review">
+                        <p>
+                            Chemistry is the study of matter, its properties, and transformations through reactions.
+                        </p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lessons science-lessons lessonRedirector">
+                    <h1>Space and Astrology</h1>
+                    <div class="lesson-review">
+                        <p>
+                            Space is vast, astrology studies celestial bodies and their influence on Earth.
+                        </p>
+                        <div>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star checked-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form action="/lesson" method="post">
+                <button id="lesson-button"><a href="./lesson">Browse More</a></button>
+            </form>
+        </div>
+        <div id="Right-main">
+            <h1>Classification</h1>
+            <div id="class-section">
+                <div>
+                    <h2>Subjects</h2>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>Math</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>Science</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>English</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>ICT</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>Economics and Livelihood</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>Arts</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>Language and linguistics</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>History</p>
+                    </div>
+                    <div class="subjects">
+                        <input type="checkbox"/>
+                        <p>World Religion and Beliefs</p>
+                    </div>
+                </div>
+                <div>
+                    <h2>Grades</h2>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade1"/>
+                        <p>Grade 1</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade2"/>
+                        <p>Grade 2</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade3"/>
+                        <p>Grade 3</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade4"/>
+                        <p>Grade 4</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade5"/>
+                        <p>Grade 5</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade6"/>
+                        <p>Grade 6</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade7"/>
+                        <p>Grade 7</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade8"/>
+                        <p>Grade 8</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade9"/>
+                        <p>Grade 9</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade10"/>
+                        <p>Grade 10</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade11"/>
+                        <p>Grade 11</p>
+                    </div>
+                    <div class="grade">
+                        <input type="radio" name="grade" value="Grade12"/>
+                        <p>Grade 12</p>
+                    </div>
+                </div>
+                <button id="rightMain-button">Search</button>
+            </div>
+        </div>
+    </main>
+<footer>
+    <div id="footer-section-container">
+        <div class="footer-sections">
+            <h3>Where to find us</h3>
+            <p>Suite 402 Traders Hotel Roxas Boulevard</p>
+            <p>pasay city,</p>
+            <p>Pasay City,Philippines</p>
+        </div>
+        <div class="footer-sections">
+            <h3>Contact Us</h3>
+            <ul>
+                <li><i class="fa fa-phone"></i><a href="#">(+63) 966 527 8644</a></li>
+                <li><i class="fa fa-envelope"></i><a href="#">StudySmart@gmail.co.ph</a></li>
+                <li><i class="fa fa-twitter"></i><a href="#">StudySmart</a></li>
+                <li><i class="fa fa-linkedin"></i><a href="#">Study Smart</a></li>
+                <li><i class="fa fa-globe"></i><a href="#">www.StudySmart.com</a></li>
+            </ul>
+        </div>
+        <div class="footer-sections">
+            <h3>Section</h3>
+            <ul>
+                <li><a href="#">Popular Now</a></li>
+                <li><a href="#">New Updates</a></li>
+                <li><a href="#">Store</a></li>
+                <li><a href="#">New</a></li>
+            </ul>
+        </div>
+        <div class="footer-sections">
+            <form>
+                <h3>Subscribe to our newsletter</h3>
+                <p>Monthly digest of what's new and exciting from us.</p>
+                <div>
+                    <input id="newsletter1" type="email" placeholder="Email address">
+                    <button type="button" id="btn">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div >
+        <p id="copyright">&copy; 2022 Company, Inc. All rights reserved.</p>
+    </div>
+</footer>
+<script>
+    //Swiperjs
+    const swiper = new Swiper('.swiper', {
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        loop: true,
+
+        pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        },
+
+        navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+        },
+    });
+    //menu icon
+    function changeToX(x) {
+    x.classList.toggle("change");
+    document.getElementById("popUp-hidden").classList.toggle("show");
+    };
+    //lesson redirect
+    document.addEventListener('DOMContentLoaded', () => {
+    const myDivs = document.getElementsByClassName('lessonRedirector');
+    for (let i = 0; i < myDivs.length; i++) {
+        myDivs[i].addEventListener('click', () => {
+        window.location.href = './lesson';
+        });
+    }
+    });
+</script>
+</body>
+</html>
