@@ -31,7 +31,7 @@
         #button-navBar button {border-radius:20px;border:1px solid #fff;padding:10px;width:7vw;}
         #button-navBar button:hover {box-shadow:2px 2px 5px;}
         #logIn-button {background-color:transparent;margin-right:15px;color:white;}
-        #signUp-button {color:#000;}
+        #signUp-button > a {color:#000 !important;}
         /*POP UPS NAVBAR*/
         #navBar-container {display:flex;flex-direction:row;justify-content:space-around;align-items:center;}
         #popularNow {position:relative;}
@@ -156,7 +156,7 @@
                     <button id="logIn-button"><a href="./login">Log In</a></button>
                 </form>
                 <form action="/SignUp" method="post">
-                    <button id="signUp-button" action="/SignUp" method="post"><a href="./signup">Sign Up</a></button>
+                    <button id="signUp-button"><a href="./signup">Sign Up</a></button>
                 </form>
             </div>
         </nav>
